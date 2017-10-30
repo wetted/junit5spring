@@ -24,8 +24,8 @@ See also:
 <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <java.version>1.8</java.version>
-  <junit-jupiter.version>5.0.0</junit-jupiter.version>
-  <junit-platform.version>1.0.0</junit-platform.version>
+  <junit-jupiter.version>5.0.1</junit-jupiter.version>
+  <junit-platform.version>1.0.1</junit-platform.version>
   <mockito.version>2.10.0</mockito.version>
 </properties>
 ...
@@ -117,7 +117,17 @@ A simple JUnit Jupiter extension to integrate Mockito into JUnit Jupiter to make
 
 The `MockitoExtension` showcases the `TestInstancePostProcessor` and `ParameterResolver` extension APIs of 
 JUnit Jupiter by providing dependency injection support at the field level and at the method parameter 
-level via *Mockito* 2.x's `@Mock` annotation.
+level via *Mockito* 2.x's `@Mock` annotation. This allows tests like:
+
+```
+@Test
+@DisplayName("Checking @Mock Parameter is resolved")
+void ensureDefaultRoleSetForNewEmployee(@Mock Role role) {
+    assertNotNull(role);
+    Employee employee = new Employee("anyone", role);
+    assertEquals("anyone", employee.getName());
+}
+```
 
 ######*What to do if you can't use the Spring Boot Parent POM*
 
@@ -131,7 +141,7 @@ The example POM uses the standard Spring Boot Parent POM, i.e.
 ```
 
 If you can't use this because you already have a parent POM there are two choices:
-  1. Add the Spring Boot Parent to the existing root parent. This is prepferable since
+  1. Add the Spring Boot Parent to the existing root parent. This is preferable since
   you still get the benefit of Spring maven plugin management and property overrides.
   2. Use a scope=import in the POM dependencyManagement element:
   ```xml
@@ -167,7 +177,54 @@ If you can't use this because you already have a parent POM there are two choice
  
 ###### IDEs with and without JUnit5 support
 
-1. For IDEs with support, make the folliwng changes. This has the advantage that it prevnts
-accidental imports of Junit3/4 into tests. 
+For IDEs with JUnit5 support, make the following changes. This has the advantage that it prevents
+accidental imports of JUnit3/4 into tests. This is only useful for projects that don't need to support 
+legacy JUnit tests (i.e. you are starting from sratch, or have converted all legacy tests to JUnit5 tests).
+
+1. Change the junit-platform-runner dependency to exclude the leagcy JUnit artifact:
+```xml
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${junit-platform.version}</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <!--
+          exclude JUnit 4 if IDE has built-in support for JUnit 5
+          otherwise, need to keep it included for support of @RunWith(JUnitPlatform.class)
+          which runs JUnit5 tests in a JUnit 4 runner
+          -->
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+```
+2. Under build/plugins in the POM, configure the maven-surefire-plugin to use the JUnit5 runner
+```xml
+  <plugin>
+    <!--
+    see https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-running-unit-tests-with-maven/
+    This configures maven for native JUnit 5 run support to avoid
+    including the JUnit4 dependency, see the exludes above
+    -->
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit.platform</groupId>
+        <artifactId>junit-platform-surefire-provider</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.0.1</version>
+      </dependency>
+    </dependencies>
+  </plugin>
+
+```
  
-TODO: document this

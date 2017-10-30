@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
 @Tag("integration")
-class EmployeeRepositoryTestIT {
+class EmployeeRepositoryIT {
 
     @Autowired
     private TestEntityManager entityManager;
