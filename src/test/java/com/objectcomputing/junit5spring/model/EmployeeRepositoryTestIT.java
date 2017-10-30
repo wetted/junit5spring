@@ -1,4 +1,4 @@
-package com.objectcomputing.junit5spring.data;
+package com.objectcomputing.junit5spring.model;
 
 import com.objectcomputing.extensions.MockitoExtension;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +21,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
+@Tag("integration")
 class EmployeeRepositoryTestIT {
 
     @Autowired
@@ -30,7 +31,6 @@ class EmployeeRepositoryTestIT {
     private EmployeeRepository employeeRepository;
 
     @Test
-    @Tag("integration")
     @DisplayName("when FindByName then return Employee")
     void whenFindByName_thenReturnEmployee() {
         assertThat(employeeRepository, notNullValue());
@@ -38,7 +38,6 @@ class EmployeeRepositoryTestIT {
         Employee alex = new Employee("alex");
         entityManager.persist(alex);
         entityManager.flush();
-
         // when
         Employee found = employeeRepository.findByName(alex.getName());
         // then

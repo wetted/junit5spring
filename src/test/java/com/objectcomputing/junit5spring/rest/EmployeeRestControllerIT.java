@@ -1,8 +1,8 @@
 package com.objectcomputing.junit5spring.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.objectcomputing.junit5spring.data.Employee;
-import com.objectcomputing.junit5spring.data.EmployeeRepository;
+import com.objectcomputing.junit5spring.model.Employee;
+import com.objectcomputing.junit5spring.model.EmployeeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -38,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = H2)
 //@AutoConfigureRestDocs(outputDir = "target/rest-docs")
+@Tag("integration")
 class EmployeeRestControllerIT {
 
     @Autowired
@@ -55,7 +56,6 @@ class EmployeeRestControllerIT {
     }
 
     @Test
-    @Tag("integration")
     @DisplayName("when valid input then create employee with HTTP status = 201")
     void whenValidInput_thenCreateEmployee() throws Exception {
         Employee bob = new Employee("bob");
@@ -77,7 +77,6 @@ class EmployeeRestControllerIT {
     }
 
     @Test
-    @Tag("integration")
     @DisplayName("given Employees when GET /employees then HTTP status = 200")
     void givenEmployees_whenGetEmployees_thenStatus200() throws Exception {
 

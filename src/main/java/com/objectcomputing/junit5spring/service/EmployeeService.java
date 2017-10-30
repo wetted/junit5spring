@@ -1,6 +1,6 @@
 package com.objectcomputing.junit5spring.service;
 
-import com.objectcomputing.junit5spring.data.Employee;
+import com.objectcomputing.junit5spring.model.Employee;
 
 import java.util.List;
 

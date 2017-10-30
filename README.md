@@ -167,5 +167,7 @@ If you can't use this because you already have a parent POM there are two choice
  
 ###### IDEs with and without JUnit5 support
 
-1. For IDEs with support, change the depdendency for 
+1. For IDEs with support, make the folliwng changes. This has the advantage that it prevnts
+accidental imports of Junit3/4 into tests. 
  
+TODO: document this

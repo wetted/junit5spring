@@ -1,4 +1,4 @@
-package com.objectcomputing.junit5spring.data;
+package com.objectcomputing.junit5spring.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

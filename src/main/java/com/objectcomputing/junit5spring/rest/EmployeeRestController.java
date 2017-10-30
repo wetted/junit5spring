@@ -1,7 +1,7 @@
 package com.objectcomputing.junit5spring.rest;
 
 import com.objectcomputing.junit5spring.NotFoundException;
-import com.objectcomputing.junit5spring.data.Employee;
+import com.objectcomputing.junit5spring.model.Employee;
 import com.objectcomputing.junit5spring.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

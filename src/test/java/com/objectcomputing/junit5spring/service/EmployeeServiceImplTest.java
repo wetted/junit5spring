@@ -1,8 +1,8 @@
 package com.objectcomputing.junit5spring.service;
 
 import com.objectcomputing.extensions.MockitoExtension;
-import com.objectcomputing.junit5spring.data.Employee;
-import com.objectcomputing.junit5spring.data.EmployeeRepository;
+import com.objectcomputing.junit5spring.model.Employee;
+import com.objectcomputing.junit5spring.model.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

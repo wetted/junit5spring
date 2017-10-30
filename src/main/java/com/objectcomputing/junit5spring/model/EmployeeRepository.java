@@ -1,4 +1,4 @@
-package com.objectcomputing.junit5spring.data;
+package com.objectcomputing.junit5spring.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

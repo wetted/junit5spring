@@ -1,7 +1,7 @@
 package com.objectcomputing.junit5spring.service.impl;
 
-import com.objectcomputing.junit5spring.data.Employee;
-import com.objectcomputing.junit5spring.data.EmployeeRepository;
+import com.objectcomputing.junit5spring.model.Employee;
+import com.objectcomputing.junit5spring.model.EmployeeRepository;
 import com.objectcomputing.junit5spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

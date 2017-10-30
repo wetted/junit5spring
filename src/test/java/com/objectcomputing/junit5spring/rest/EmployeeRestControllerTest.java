@@ -1,7 +1,7 @@
 package com.objectcomputing.junit5spring.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.objectcomputing.junit5spring.data.Employee;
+import com.objectcomputing.junit5spring.model.Employee;
 import com.objectcomputing.junit5spring.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
