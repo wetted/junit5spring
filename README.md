@@ -10,7 +10,7 @@ See also:
 * https://stackoverflow.com/questions/21317006/spring-boot-parent-pom-when-you-already-have-a-parent-pom
 * https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-build-systems.html#using-boot-maven-without-a-parent
 
-##### Summary of what's needed to integrate JUnit5 with Spring 4.3/Boot 1.5
+##### Summary of what's needed to integrate JUnit5 with Spring 4.3/Spring Boot 1.5
 
 ######*Changes to the POM*
 

@@ -35,12 +35,12 @@ class EmployeeRepositoryIT {
     void whenFindByName_thenReturnEmployee() {
         assertThat(employeeRepository, notNullValue());
         // given
-        Employee alex = new Employee("alex");
-        entityManager.persist(alex);
+        Employee expected = new Employee("alex");
+        entityManager.persist(expected);
         entityManager.flush();
         // when
-        Employee found = employeeRepository.findByName(alex.getName());
+        Employee actual = employeeRepository.findByName(expected.getName());
         // then
-        assertThat(found.getName(), equalTo(alex.getName()));
+        assertThat(actual.getName(), equalTo(expected.getName()));
     }
 }

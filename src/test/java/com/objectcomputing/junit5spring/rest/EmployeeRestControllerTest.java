@@ -29,10 +29,10 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@WebMvcTest(controllers = EmployeeRestController.class)
 @WebMvcTest
 @WebAppConfiguration
 class EmployeeRestControllerTest {
@@ -62,7 +62,9 @@ class EmployeeRestControllerTest {
         mockMvc.perform(post("/api/v1/employees").contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(alex)))
             .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.name", is("alex")));
+            .andExpect(jsonPath("$.name", is("alex")))
+            .andDo(print());
+        ;
         verify(employeeService, VerificationModeFactory.times(1)).save(Mockito.any());
         reset(employeeService);
     }
@@ -81,7 +83,8 @@ class EmployeeRestControllerTest {
             .andExpect(jsonPath("$", hasSize(3)))
             .andExpect(jsonPath("$[0].name", is(alex.getName())))
             .andExpect(jsonPath("$[1].name", is(john.getName())))
-            .andExpect(jsonPath("$[2].name", is(bob.getName())));
+            .andExpect(jsonPath("$[2].name", is(bob.getName())))
+            .andDo(print());
         verify(employeeService, VerificationModeFactory.times(1)).getAllEmployees();
         reset(employeeService);
     }
