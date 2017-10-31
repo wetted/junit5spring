@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 //@RunWith(JUnitPlatform.class)
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-class Junit5springApplicationTests {
+class Junit5springApplicationTest {
 
     @Autowired
     EmployeeRestController controller;

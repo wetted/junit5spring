@@ -68,7 +68,12 @@
         </exclusion>
       </exclusions>
 		</dependency>
-		<dependency>
+    <dependency>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>java-hamcrest</artifactId>
       <version>2.0.0.0</version>
@@ -171,7 +176,29 @@
           </dependency>
         </dependencies>
       </plugin>
-		</plugins>
+
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-docs</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <sourceDocumentName>index.adoc</sourceDocumentName>
+              <backend>html</backend>
+              <attributes>
+                <snippets>${project.build.directory}/rest-docs</snippets>
+              </attributes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
 	</build>
 
   <repositories>
