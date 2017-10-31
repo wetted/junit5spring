@@ -63,7 +63,7 @@ class EmployeeRestControllerTest {
             .content(objectMapper.writeValueAsString(alex)))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.name", is("alex")))
-            .andDo(print());
+            .andDo(print())
         ;
         verify(employeeService, VerificationModeFactory.times(1)).save(Mockito.any());
         reset(employeeService);

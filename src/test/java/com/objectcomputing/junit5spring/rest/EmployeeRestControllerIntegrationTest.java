@@ -51,11 +51,11 @@ class EmployeeRestControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private EmployeeRepository repository;
+    private EmployeeRepository employeeRepository;
 
     @AfterEach
     void resetDb() {
-        repository.deleteAll();
+        employeeRepository.deleteAll();
     }
 
     @Test
@@ -75,7 +75,7 @@ class EmployeeRestControllerIntegrationTest {
             )
         ;
 
-        List<Employee> employeesFound = repository.findAll();
+        List<Employee> employeesFound = employeeRepository.findAll();
         assertAll(
             "verify returned collection",
             () -> assertThat(employeesFound.size(), equalTo(1)),
@@ -91,8 +91,8 @@ class EmployeeRestControllerIntegrationTest {
 
         Employee bob = new Employee("bob");
         Employee alex = new Employee("alex");
-        repository.save(Arrays.asList(bob, alex));
-        repository.flush();
+        employeeRepository.save(Arrays.asList(bob, alex));
+        employeeRepository.flush();
 
         mvc.perform(get("/api/v1/employees").contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())

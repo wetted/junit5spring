@@ -1,6 +1,8 @@
-# springboot-JUnit5-tutorial
+# Integrating JUnit 5 with Spring Boot 1.5.x (Spring 4.3.x)
 
 ### HowTo Integrate JUnit5 with Spring 4.x and Spring Boot 1.5.x
+
+Requires Java 8 or later (Junit 5 requirement)
 
 See also:
 * https://github.com/sbrannen/spring-test-junit5
