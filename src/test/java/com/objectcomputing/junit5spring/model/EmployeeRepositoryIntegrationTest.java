@@ -44,14 +44,16 @@ class EmployeeRepositoryIntegrationTest {
         assertThat(employeeRepository, notNullValue());
         // given
         Employee expected = new Employee("alex");
-        entityManager.persist(expected);
-        entityManager.flush();
+        Object id = entityManager.persistAndGetId(expected);
 
         // when
         Employee actual = employeeRepository.findByName(expected.getName());
 
         // then
-        assertThat(actual.getName(), equalTo(expected.getName()));
+        assertAll(
+            () -> assertThat(actual.getName(), equalTo(expected.getName())),
+            () -> assertThat(actual.getId(), equalTo(id))
+        );
     }
 
     @Test
